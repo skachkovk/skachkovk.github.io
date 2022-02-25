@@ -4,12 +4,8 @@
         <html lang="ru">
             <head>
                 <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width"/>
                 <title>Задание 1</title>
-                <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-svg.js"/>
-                <style>
-                    .MathJax { font-size: 300%; }
-                </style>
+                <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-svg.js"/>
             </head>
             <body>
                 <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -19,22 +15,10 @@
         </html>
     </xsl:template>
 
-    <xsl:template match="строка">
-        <mrow>
-            <xsl:apply-templates/>
-        </mrow>
-    </xsl:template>
-
     <xsl:template match="операнд">
         <mi>
             <xsl:value-of select="current()"/>
         </mi>
-    </xsl:template>
-
-    <xsl:template match="число">
-        <mn>
-            <xsl:value-of select="current()"/>
-        </mn>
     </xsl:template>
 
     <xsl:template match="оператор">
@@ -49,10 +33,28 @@
         </msqrt>
     </xsl:template>
 
+    <xsl:template match="строка">
+        <mrow>
+            <xsl:apply-templates/>
+        </mrow>
+    </xsl:template>
+
     <xsl:template match="дробь">
         <mfrac>
             <xsl:apply-templates/>
         </mfrac>
+    </xsl:template>
+
+    <xsl:template match="число">
+        <mn>
+            <xsl:value-of select="current()"/>
+        </mn>
+    </xsl:template>
+
+    <xsl:template match="низверх">
+        <munderover displaystyle="true">
+            <xsl:apply-templates/>
+        </munderover>
     </xsl:template>
 
     <xsl:template match="верх">
@@ -65,11 +67,5 @@
         <msub>
             <xsl:apply-templates/>
         </msub>
-    </xsl:template>
-
-    <xsl:template match="низверх">
-        <munderover displaystyle="true">
-            <xsl:apply-templates/>
-        </munderover>
     </xsl:template>
 </xsl:stylesheet>
